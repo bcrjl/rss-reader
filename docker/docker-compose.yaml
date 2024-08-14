@@ -1,0 +1,15 @@
+version: "2.24.6"
+services:
+  rss-reader:
+    image: bcrjl/rss-reader:latest
+    container_name: rss-reader
+    restart: always
+    volumes:
+      - ./config:/app/config
+      - ./log:/app/log
+      - ./images:/app/images
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      - TZ=Asia/Shanghai
+    ports:
+      - '24803:24803'

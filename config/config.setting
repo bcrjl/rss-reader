@@ -1,0 +1,32 @@
+[system]
+## 配置订阅频率
+refresh=5
+## 保存微博图片
+saveWeiBoImages=true
+## 上传图片到AList
+uploadAList=false
+## AList Url
+aListUrl=
+## AList 账号
+aListUser=
+## AList 密码
+aListPass=
+## AList 上传路径
+aListUploadPath=
+[mail]
+## 启用邮件推送
+enable=false
+## 启用邮件更新推送
+sendUpdate=true
+## 邮件服务器的SMTP地址，可选，默认为smtp.<发件人邮箱后缀>
+host=smtp.qq.com
+## 邮件服务器的SMTP端口，可选，默认25
+port=465
+## 发件人（必须正确，否则发送失败）
+from=rss-reply<no-reply@***.com>
+## 用户名，默认为发件人邮箱前缀
+user=xxxxxxxxxxxxxx
+## 密码（注意，某些邮箱需要为SMTP服务单独设置授权码，详情查看相关帮助）
+pass=
+## 接收人，多人以英文逗号分割
+to=
