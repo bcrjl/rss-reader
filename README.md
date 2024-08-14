@@ -2,6 +2,13 @@
 
 RSS阅读器，基于Java SpringBoot搭建。
 
+## 实现功能
+
+1. RSS订阅功能；
+2. 邮件推送；
+3. 微博图片保存；
+4. 微博图片上传AList；
+
 ## 部署运行
 
 ```shell
@@ -26,3 +33,8 @@ bcrjl/rss-reader:latest
 | ./log | /app/log | 运行日志  |
 | ./images | /app/images | 下载的文件 |
 
+## TODO
+
+1. 微博视频本地保存及上传AList；
+2. 图片/视频本地保存性能提升
+3. ...
