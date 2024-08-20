@@ -1,13 +1,21 @@
+package com.bcrjl.rss.common.util;
+
 import cn.hutool.core.lang.Console;
 import cn.hutool.extra.mail.MailAccount;
-import com.bcrjl.rss.common.util.MailUtils;
+import org.junit.jupiter.api.Test;
 
 /**
+ * 邮件测试
+ *
  * @author yanqs
- * @since 2024-08-09
  */
-public class MailTest {
-    public static void main(String[] args) {
+class MailUtilsTest {
+
+    /**
+     * 初始化邮件账号
+     */
+    @Test
+    void initMailAccount() {
         MailAccount mailAccount = MailUtils.initMailAccount();
         Console.log(mailAccount);
     }

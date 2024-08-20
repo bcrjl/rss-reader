@@ -12,7 +12,7 @@ import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import cn.hutool.setting.Setting;
 import com.bcrjl.rss.common.util.AListUtils;
-import com.bcrjl.rss.common.util.HtmlParseUtils;
+import com.bcrjl.rss.common.util.HtmlUtils;
 import com.bcrjl.rss.common.util.MailUtils;
 import com.bcrjl.rss.common.util.RssUtils;
 import com.bcrjl.rss.model.entity.RssEntity;
@@ -90,7 +90,7 @@ public class RssJob {
         if (CollUtil.isNotEmpty(list)) {
             Setting setting = new Setting(CONFIG_PATH, CharsetUtil.CHARSET_UTF_8, true);
             Setting emailSetting = setting.getSetting(SET_MAIL);
-            saveWeiBoImagesOrUpdateAlist(list);
+            saveWeiBoImagesOrUpdateAList(list);
             if (emailSetting.getBool(MAIL_CONFIG_ENABLE) && emailSetting.getBool("sendUpdate")) {
                 // 如果邮箱开启且发送更新邮件开启 则推送通知
                 StringBuffer stringBuffer = new StringBuffer();
@@ -111,7 +111,7 @@ public class RssJob {
     /**
      * 保存微博图片到本地且上传AList
      */
-    private void saveWeiBoImagesOrUpdateAlist(List<RssEntity> list) {
+    private void saveWeiBoImagesOrUpdateAList(List<RssEntity> list) {
         Setting setting = new Setting(CONFIG_PATH, CharsetUtil.CHARSET_UTF_8, true);
         Setting systemSetting = setting.getSetting(SET_SYSTEM);
         Boolean saveImages = Boolean.valueOf(systemSetting.get(SAVE_WEIBO_IMAGES));
@@ -119,14 +119,14 @@ public class RssJob {
         if (saveImages) {
             // 保存图片
             list.forEach(obj -> {
-                List<String> imgList = HtmlParseUtils.extractImageUrls(obj.getDescription());
+                List<String> imgList = HtmlUtils.extractImageUrls(obj.getDescription());
                 imgList.forEach(imgObj -> {
                     if (imgObj.contains("sinaimg") && !imgObj.contains("timeline_card") && !imgObj.contains("qixi2018")) {
                         int lastSlashIndex = imgObj.lastIndexOf('/');
                         // 如果找到了斜杠，就从斜杠后面截取字符串
                         String fileName = imgObj.substring(lastSlashIndex + 1);
                         //log.info("微博图片文件名：{}", fileName);
-                        HttpResponse weiBoImagesHttpRequest = HtmlParseUtils.getWeiBoImagesHttpRequest(fileName);
+                        HttpResponse weiBoImagesHttpRequest = HtmlUtils.getWeiBoImagesHttpRequest(fileName);
                         byte[] bytes = weiBoImagesHttpRequest.bodyBytes();
                         FileUtil.writeBytes(bytes, new File(IMAGES_PATH + fileName));
                         if (uploadAList) {
