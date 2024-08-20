@@ -20,18 +20,26 @@ import java.util.Map;
 import static com.bcrjl.rss.common.constant.AppConstant.*;
 
 /**
- * 功能描述:
+ * AList工具类
  *
  * @author yanqs
- * @since 2024-08-10
  */
 @Slf4j
 public class AListUtils {
 
+    /**
+     * AList 登录获取 Token 接口路径
+     */
     private static final String TOKEN_URL = "/api/auth/login";
 
+    /**
+     * 上传流 接口路径
+     */
     private static final String UPLOAD_URL = "/api/fs/put";
 
+    /**
+     * 创建本地缓存
+     */
     private static TimedCache<String, String> timedCache = CacheUtil.newTimedCache(86400000);
 
     /**
@@ -65,9 +73,15 @@ public class AListUtils {
         }
     }
 
+    /**
+     * 上传文件
+     *
+     * @param fileByte 文件字节
+     * @param fileName 文件名
+     */
     public static void uploadFile(byte[] fileByte, String fileName) {
         try {
-            String time = DateUtil.format(new Date(), "yyyyMMddHH");
+            String time = DateUtil.format(new Date(), "yyyyMMdd");
             Setting setting = new Setting(CONFIG_PATH, CharsetUtil.CHARSET_UTF_8, true);
             Setting systemSetting = setting.getSetting(SET_SYSTEM);
             String aListUrl = systemSetting.get(ALIST_URL);
@@ -80,9 +94,7 @@ public class AListUtils {
                     .execute();
             if (httpResponse.isOk()) {
                 String message = JSONUtil.parseObj(httpResponse.body()).getStr("message");
-                if ("success".equals(message)) {
-                    //log.info("AList上传成功");
-                } else {
+                if (!"success".equals(message)) {
                     log.info("AList上传失败：{}", message);
                 }
             } else {
