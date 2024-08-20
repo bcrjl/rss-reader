@@ -16,6 +16,7 @@ docker run -d --restart=always \
 -v ./config:/app/config \
 -v ./log:/app/log \
 -v ./images:/app/images \
+-v ./video:/app/video \
 -v /etc/localtime:/etc/localtime:ro \
 --name rss-reader \
 bcrjl/rss-reader:latest
@@ -27,11 +28,12 @@ bcrjl/rss-reader:latest
 
 ### 映射目录说明
 
-| 本地目录 | 容器目录 | 说明    |
-| --- | --- |-------|
+| 本地目录     | 容器目录 | 说明    |
+|----------| --- |-------|
 | ./config | /app/config | 配置文件  |
-| ./log | /app/log | 运行日志  |
-| ./images | /app/images | 下载的文件 |
+| ./log    | /app/log | 运行日志  |
+| ./images | /app/images | 下载的图片 |
+| ./video  | /app/video | 下载的视频 |
 
 ## FAQ
 
