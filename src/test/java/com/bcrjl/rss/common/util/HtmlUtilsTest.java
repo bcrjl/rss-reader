@@ -46,7 +46,10 @@ class HtmlUtilsTest {
      */
     @Test
     void getWeiBoImagesHttpRequest() {
-
+        String url="https://f.video.weibocdn.com/o0/Eglhl42Glx08hlnyHMZa01041200fr9J0E010.mp4?label=mp4_720p&template=720x1280.24.0&ori=0&ps=1CwnkDw1GXwCQx&Expires=1724122135&ssig=KmPchkXSzw&KID=unistore,video";
+        HttpResponse weiBoVideoHttpRequest = HtmlUtils.getWeiBoVideoHttpRequest(url);
+        byte[] bytes = weiBoVideoHttpRequest.bodyBytes();
+        FileUtil.writeBytes(bytes, new File(IMAGES_PATH + "Eglhl42Glx08hlnyHMZa01041200fr9J0E010.mp4"));
     }
 
     /**
@@ -54,14 +57,13 @@ class HtmlUtilsTest {
      */
     @Test
     void getWeiBoVideosHttpRequest() {
-        String url = "https://f.video.weibocdn.com/o0/KjwJ3CYwlx08hlyj0a8001041200ah0h0E010.mp4" +
-                "?label=mp4_720p&amp;template=720x960.24.0&amp;ori=0&amp;ps=1CwnkDw1GXwCQx&amp;Expires=1724122135&amp;ssig=Gd1gjIz05D&amp;KID=unistore,video";
+        String url="https://f.video.weibocdn.com/o0/Eglhl42Glx08hlnyHMZa01041200fr9J0E010.mp4?label=mp4_720p&template=720x1280.24.0&ori=0&ps=1CwnkDw1GXwCQx&Expires=1724122135&ssig=KmPchkXSzw&KID=unistore,video";
         HttpRequest request = HttpRequest.get(url)
                 .header(Header.REFERER, "https://weibo.com/")
                 .header(Header.USER_AGENT, USER_AGENT)
                 .timeout(20000);
         HttpResponse httpResponse = request.executeAsync();
         byte[] bytes = httpResponse.bodyBytes();
-        FileUtil.writeBytes(bytes, new File(IMAGES_PATH + "KjwJ3CYwlx08hlyj0a8001041200ah0h0E010.mp4"));
+        FileUtil.writeBytes(bytes, new File(IMAGES_PATH + "Eglhl42Glx08hlnyHMZa01041200fr9J0E010.mp4"));
     }
 }

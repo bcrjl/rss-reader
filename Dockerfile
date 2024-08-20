@@ -8,8 +8,7 @@ EXPOSE 24803
 WORKDIR /app
 
 # 创建 bin 目录
-RUN mkdir -p bin \
-    && mkdir -p config \
+RUN mkdir -p config \
     && mkdir -p lib \
     && mkdir -p log
 

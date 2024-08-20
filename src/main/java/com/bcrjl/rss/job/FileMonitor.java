@@ -40,7 +40,7 @@ public class FileMonitor {
                 "## 配置订阅频率\n" +
                 "refresh = 5\n" +
                 "## 保存微博图片\n" +
-                "saveWeiBoImages=false" +
+                "saveWeiBoImages=false\n" +
                 "## 保存微博视频\n" +
                 "saveWeiBoVideo=true\n" +
                 "## 上传图片到AList\n" +

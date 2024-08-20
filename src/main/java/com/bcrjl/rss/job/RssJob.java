@@ -4,6 +4,7 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.file.FileWriter;
 import cn.hutool.core.io.resource.ResourceUtil;
+import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.CharsetUtil;
 import cn.hutool.extra.mail.MailAccount;
 import cn.hutool.extra.mail.MailUtil;
@@ -90,7 +91,12 @@ public class RssJob {
         if (CollUtil.isNotEmpty(list)) {
             Setting setting = new Setting(CONFIG_PATH, CharsetUtil.CHARSET_UTF_8, true);
             Setting emailSetting = setting.getSetting(SET_MAIL);
-            saveWeiBoImagesOrUpdateAList(list);
+            ThreadUtil.execAsync(new Runnable() {
+                @Override
+                public void run() {
+                    saveWeiBoImagesOrUpdateAList(list);
+                }
+            });
             if (emailSetting.getBool(MAIL_CONFIG_ENABLE) && emailSetting.getBool("sendUpdate")) {
                 // 如果邮箱开启且发送更新邮件开启 则推送通知
                 StringBuffer stringBuffer = new StringBuffer();
@@ -141,8 +147,8 @@ public class RssJob {
                 if(CollUtil.isNotEmpty(videoList)){
                     videoList.forEach(videoObj -> {
                         String fileName = HtmlUtils.getFileName(videoObj);
-                        HttpResponse weiBoImagesHttpRequest = HtmlUtils.getWeiBoVideoHttpRequest(videoObj);
-                        byte[] bytes = weiBoImagesHttpRequest.bodyBytes();
+                        HttpResponse weiBoVideoHttpRequest = HtmlUtils.getWeiBoVideoHttpRequest(videoObj);
+                        byte[] bytes = weiBoVideoHttpRequest.bodyBytes();
                         FileUtil.writeBytes(bytes, new File(VIDEO_PATH + fileName));
                         if (uploadAList) {
                            AListUtils.uploadFile(bytes, fileName);
