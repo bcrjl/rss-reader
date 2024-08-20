@@ -52,7 +52,7 @@ public class FileMonitor {
                 "## AList 密码\n" +
                 "aListPass=\n" +
                 "## AList 上传路径\n" +
-                "aListUploadPath=" +
+                "aListUploadPath=\n" +
                 "[mail]\n" +
                 "## 启用邮件推送\n" +
                 "enable=false\n" +
