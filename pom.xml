@@ -6,7 +6,7 @@
 
     <groupId>com.bcrjl.rss</groupId>
     <artifactId>rss-reader</artifactId>
-    <version>0.4.2</version>
+    <version>0.5.0</version>
     <name>RSS订阅阅读器</name>
 
     <properties>

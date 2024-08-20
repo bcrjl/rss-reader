@@ -33,6 +33,12 @@ bcrjl/rss-reader:latest
 | ./log | /app/log | 运行日志  |
 | ./images | /app/images | 下载的文件 |
 
+## FAQ
+
+### 1.AList上传异常
+
+配置错误，请检查`config.setting`配置文件中的`aListUrl`配置，结尾不能带`/`
+
 ## TODO
 
 1. 微博视频本地保存及上传AList；
