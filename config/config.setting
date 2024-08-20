@@ -3,6 +3,8 @@
 refresh=5
 ## 保存微博图片
 saveWeiBoImages=true
+## 保存微博视频
+saveWeiBoVideo=true
 ## 上传图片到AList
 uploadAList=false
 ## AList Url

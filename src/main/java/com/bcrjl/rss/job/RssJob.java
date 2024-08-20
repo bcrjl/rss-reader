@@ -114,18 +114,16 @@ public class RssJob {
     private void saveWeiBoImagesOrUpdateAList(List<RssEntity> list) {
         Setting setting = new Setting(CONFIG_PATH, CharsetUtil.CHARSET_UTF_8, true);
         Setting systemSetting = setting.getSetting(SET_SYSTEM);
-        Boolean saveImages = Boolean.valueOf(systemSetting.get(SAVE_WEIBO_IMAGES));
-        Boolean uploadAList = Boolean.valueOf(systemSetting.get(UPLOAD_ALIST));
+        boolean saveImages = Boolean.parseBoolean(systemSetting.get(SAVE_WEIBO_IMAGES));
+        boolean saveVideo = Boolean.valueOf(systemSetting.get(SAVE_WEIBO_VIDEO));
+        boolean uploadAList = Boolean.valueOf(systemSetting.get(UPLOAD_ALIST));
         if (saveImages) {
             // 保存图片
             list.forEach(obj -> {
                 List<String> imgList = HtmlUtils.extractImageUrls(obj.getDescription());
                 imgList.forEach(imgObj -> {
                     if (imgObj.contains("sinaimg") && !imgObj.contains("timeline_card") && !imgObj.contains("qixi2018")) {
-                        int lastSlashIndex = imgObj.lastIndexOf('/');
-                        // 如果找到了斜杠，就从斜杠后面截取字符串
-                        String fileName = imgObj.substring(lastSlashIndex + 1);
-                        //log.info("微博图片文件名：{}", fileName);
+                        String fileName = HtmlUtils.getFileName(imgObj);
                         HttpResponse weiBoImagesHttpRequest = HtmlUtils.getWeiBoImagesHttpRequest(fileName);
                         byte[] bytes = weiBoImagesHttpRequest.bodyBytes();
                         FileUtil.writeBytes(bytes, new File(IMAGES_PATH + fileName));
@@ -134,6 +132,23 @@ public class RssJob {
                         }
                     }
                 });
+            });
+        }
+        if(saveVideo){
+            // 保存视频
+            list.forEach(obj -> {
+                List<String> videoList = HtmlUtils.extractVideoUrls(obj.getDescription());
+                if(CollUtil.isNotEmpty(videoList)){
+                    videoList.forEach(videoObj -> {
+                        String fileName = HtmlUtils.getFileName(videoObj);
+                        HttpResponse weiBoImagesHttpRequest = HtmlUtils.getWeiBoVideoHttpRequest(videoObj);
+                        byte[] bytes = weiBoImagesHttpRequest.bodyBytes();
+                        FileUtil.writeBytes(bytes, new File(VIDEO_PATH + fileName));
+                        if (uploadAList) {
+                           AListUtils.uploadFile(bytes, fileName);
+                        }
+                    });
+                }
             });
         }
     }

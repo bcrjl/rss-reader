@@ -79,6 +79,19 @@ public class HtmlUtils {
         }
     }
 
+    public static HttpResponse getWeiBoVideoHttpRequest(String url) {
+        try {
+            HttpRequest request = HttpRequest.get(url)
+                    .header(Header.REFERER, "https://weibo.com/")
+                    .header(Header.USER_AGENT, USER_AGENT)
+                    .timeout(20000);
+            return request.executeAsync();
+        } catch (Exception e) {
+            log.error("获取视频数据异常：", e);
+            return null;
+        }
+    }
+
 
     /**
      * 根据正则获取html中的内容

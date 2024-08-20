@@ -23,6 +23,7 @@ public interface AppConstant {
      */
     String RSS_CONFIG_PATH = System.getProperty("user.dir") + "/config/data.json";
     String IMAGES_PATH = System.getProperty("user.dir") + "/images/";
+    String VIDEO_PATH = System.getProperty("user.dir") + "/video/";
 
     String SET_SYSTEM = "system";
     String SET_MAIL = "mail";
@@ -35,6 +36,11 @@ public interface AppConstant {
      * 保存微博图片
      */
     String SAVE_WEIBO_IMAGES = "saveWeiBoImages";
+
+    /**
+     * 保存微博视频
+     */
+    String SAVE_WEIBO_VIDEO = "saveWeiBoVideo";
 
     /**
      * 上传图片到AList
