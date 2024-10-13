@@ -6,7 +6,7 @@
 
     <groupId>com.bcrjl.rss</groupId>
     <artifactId>rss-reader</artifactId>
-    <version>0.5.0</version>
+    <version>0.5.1</version>
     <name>RSS订阅阅读器</name>
 
     <properties>
@@ -24,6 +24,7 @@
         <lombok.version>1.18.34</lombok.version>
         <hutool.version>5.8.29</hutool.version>
         <javax.mail.version>1.6.2</javax.mail.version>
+        <commons.io.version>2.14.0</commons.io.version>
     </properties>
 
 
@@ -77,7 +78,7 @@
         <dependency>
             <groupId>commons-io</groupId>
             <artifactId>commons-io</artifactId>
-            <version>2.11.0</version>
+            <version>${commons.io.version}</version>
         </dependency>
 
         <!-- HuTool -->
