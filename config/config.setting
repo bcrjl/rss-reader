@@ -1,20 +1,10 @@
 [system]
 ## 配置订阅频率
-refresh=5
+refresh=1
 ## 保存微博图片
 saveWeiBoImages=true
 ## 保存微博视频
 saveWeiBoVideo=true
-## 上传图片到AList
-uploadAList=false
-## AList Url
-aListUrl=
-## AList 账号
-aListUser=
-## AList 密码
-aListPass=
-## AList 上传路径
-aListUploadPath=
 [mail]
 ## 启用邮件推送
 enable=false

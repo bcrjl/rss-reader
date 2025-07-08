@@ -12,7 +12,6 @@ import cn.hutool.http.HttpResponse;
 import cn.hutool.json.JSONObject;
 import cn.hutool.json.JSONUtil;
 import cn.hutool.setting.Setting;
-import com.bcrjl.rss.common.util.AListUtils;
 import com.bcrjl.rss.common.util.HtmlUtils;
 import com.bcrjl.rss.common.util.MailUtils;
 import com.bcrjl.rss.common.util.RssUtils;
@@ -115,14 +114,13 @@ public class RssJob {
     }
 
     /**
-     * 保存微博图片到本地且上传AList
+     * 保存微博图片到本地
      */
     private void saveWeiBoImagesOrUpdateAList(List<RssEntity> list) {
         Setting setting = new Setting(CONFIG_PATH, CharsetUtil.CHARSET_UTF_8, true);
         Setting systemSetting = setting.getSetting(SET_SYSTEM);
         boolean saveImages = Boolean.parseBoolean(systemSetting.get(SAVE_WEIBO_IMAGES));
         boolean saveVideo = Boolean.valueOf(systemSetting.get(SAVE_WEIBO_VIDEO));
-        boolean uploadAList = Boolean.valueOf(systemSetting.get(UPLOAD_ALIST));
         if (saveImages) {
             // 保存图片
             list.forEach(obj -> {
@@ -133,26 +131,20 @@ public class RssJob {
                         HttpResponse weiBoImagesHttpRequest = HtmlUtils.getWeiBoImagesHttpRequest(fileName);
                         byte[] bytes = weiBoImagesHttpRequest.bodyBytes();
                         FileUtil.writeBytes(bytes, new File(IMAGES_PATH + fileName));
-                        if (uploadAList) {
-                            AListUtils.uploadFile(bytes, fileName);
-                        }
                     }
                 });
             });
         }
-        if(saveVideo){
+        if (saveVideo) {
             // 保存视频
             list.forEach(obj -> {
                 List<String> videoList = HtmlUtils.extractVideoUrls(obj.getDescription());
-                if(CollUtil.isNotEmpty(videoList)){
+                if (CollUtil.isNotEmpty(videoList)) {
                     videoList.forEach(videoObj -> {
                         String fileName = HtmlUtils.getFileName(videoObj);
                         HttpResponse weiBoVideoHttpRequest = HtmlUtils.getWeiBoVideoHttpRequest(videoObj);
                         byte[] bytes = weiBoVideoHttpRequest.bodyBytes();
                         FileUtil.writeBytes(bytes, new File(VIDEO_PATH + fileName));
-                        if (uploadAList) {
-                           AListUtils.uploadFile(bytes, fileName);
-                        }
                     });
                 }
             });

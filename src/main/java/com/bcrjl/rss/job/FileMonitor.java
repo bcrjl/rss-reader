@@ -43,16 +43,6 @@ public class FileMonitor {
                 "saveWeiBoImages=false\n" +
                 "## 保存微博视频\n" +
                 "saveWeiBoVideo=true\n" +
-                "## 上传图片到AList\n" +
-                "uploadAList=false\n" +
-                "## AList Url\n" +
-                "aListUrl=\n" +
-                "## AList 账号\n" +
-                "aListUser=\n" +
-                "## AList 密码\n" +
-                "aListPass=\n" +
-                "## AList 上传路径\n" +
-                "aListUploadPath=\n" +
                 "[mail]\n" +
                 "## 启用邮件推送\n" +
                 "enable=false\n" +

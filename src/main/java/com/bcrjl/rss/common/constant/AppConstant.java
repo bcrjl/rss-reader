@@ -42,26 +42,6 @@ public interface AppConstant {
      */
     String SAVE_WEIBO_VIDEO = "saveWeiBoVideo";
 
-    /**
-     * 上传图片到AList
-     */
-    String UPLOAD_ALIST = "uploadAList";
-
-    /**
-     * AList Url
-     */
-    String ALIST_URL = "aListUrl";
-    /**
-     * AList 账号
-     */
-    String ALIST_USER = "aListUser";
-    /**
-     * AList 密码
-     */
-    String ALIST_PASS = "aListPass";
-
-    String ALIST_UPLOAD_PATH = "aListUploadPath";
-
     Integer MAIL_CONFIG_SIZE = 7;
 
     String MAIL_CONFIG_ENABLE = "enable";

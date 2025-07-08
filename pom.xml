@@ -20,7 +20,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <!-- 统一依赖管理 -->
         <spring.boot.version>2.7.18</spring.boot.version>
-        <sa-token.version>1.38.0</sa-token.version>
+        <sa-token.version>1.44.0</sa-token.version>
         <lombok.version>1.18.34</lombok.version>
         <hutool.version>5.8.29</hutool.version>
         <javax.mail.version>1.6.2</javax.mail.version>
